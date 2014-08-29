@@ -49,7 +49,7 @@
     // Uppdaterar användargränsnittet för att visa en länk
     if (self.link) {
         [self.webView loadRequest:[NSURLRequest requestWithURL:self.link.url]];
-        self.title = [NSString stringWithFormat:@"%@", self.link.url];
+        self.title = self.link.url.description;
     }
 }
 

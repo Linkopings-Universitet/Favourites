@@ -83,7 +83,7 @@
     Link *link = (self.links)[indexPath.row];
     
     // Konfigurera cellen
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", link.url];
+    cell.textLabel.text = link.url.description;
     
     return cell;
 }
