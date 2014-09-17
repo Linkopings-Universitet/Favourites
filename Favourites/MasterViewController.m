@@ -48,7 +48,7 @@
         self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
         // Markera första cellen och sätt första länken till detaljvyn
         [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
-        self.detailViewController.link = (self.links)[0];
+        self.detailViewController.link = self.links[0];
         
         // När man öppnar/stänger popovern ska tabellen ej avmarkera celler
         self.clearsSelectionOnViewWillAppear = NO;
@@ -63,7 +63,7 @@
     if ([segue.identifier isEqualToString:@"linkPush"]) {
         // Skicka länken till detaljvyn
         DetailViewController *detailVC = segue.destinationViewController;
-        detailVC.link = (self.links)[self.tableView.indexPathForSelectedRow.row];
+        detailVC.link = self.links[self.tableView.indexPathForSelectedRow.row];
     }
 }
 
@@ -80,10 +80,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     // Hämta data
-    Link *link = (self.links)[indexPath.row];
+    Link *link = self.links[indexPath.row];
     
     // Konfigurera cellen
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", link.url];
+    cell.textLabel.text = link.url.description;
     
     return cell;
 }
@@ -97,7 +97,7 @@
         [self performSegueWithIdentifier:@"linkPush" sender:self];
     } else {
         // Om iPad, sätt data i detaljkontrollern
-        self.detailViewController.link = (self.links)[indexPath.row];
+        self.detailViewController.link = self.links[indexPath.row];
     }
 }
 
