@@ -2,17 +2,17 @@
 //  DetailViewController.h
 //  Favourites
 //
-//  Created by Alek Åström on 2012-02-12.
-//  Edited by Cenny Davidsson 2014-01-15.
-//  Copyright (c) 2012 Linköpings Universitet. All rights reserved.
+//  Created by Cenny Davidsson on 2014-10-03.
+//  Copyright (c) 2014 Linköpings University. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "Link.h"
+@class Link;
 
-@interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
+@interface DetailViewController : UIViewController
 
 @property (strong, nonatomic) Link *link;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
+

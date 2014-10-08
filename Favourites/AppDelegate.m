@@ -2,51 +2,40 @@
 //  AppDelegate.m
 //  Favourites
 //
-//  Created by Alek Åström on 2012-02-12.
-//  Modified by Jakob Bandelin on 2013-09-13
-//  Copyright (c) 2012 Linköpings Universitet. All rights reserved.
+//  Created by Cenny Davidsson on 2014-10-03.
+//  Copyright (c) 2014 Linköpings University. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "Link.h"
+#import "DetailViewController.h"
 #import "MasterViewController.h"
+#import "Link.h"
 
-#define IS_IPAD() UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+@interface AppDelegate () <UISplitViewControllerDelegate>
 
-/**
- Denna appdelegat förbereder split-vyn på iPad samt ger MasterViewController
- sin initiala data i form av fyra länkar. Det enda ni behöver göra i denna fil
- är att uppdatera länkarna med en titel när ni utökat modellen.
- */
+@end
 
 @implementation AppDelegate
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    if (IS_IPAD()) {
-        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-        splitViewController.delegate = (id)navigationController.topViewController;
-    }
     
-    // Hämta MasterViewController så vi kan sätta dess initiala data
-    MasterViewController *mvc;
-    if (IS_IPAD()) {
-        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-        UINavigationController *navigationController = (splitViewController.viewControllers)[0];
-        mvc = (MasterViewController *)navigationController.topViewController;
-    } else {
-        UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-        mvc = (MasterViewController *)navigationController.topViewController;
-    }
+    // Förbered splitviewcontrollern
+    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    UINavigationController *detailNavigationController = [splitViewController.viewControllers lastObject];
+    detailNavigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
+    splitViewController.delegate = self;
     
-    // Ge länkar till MasterViewController
-    mvc.links = [NSMutableArray arrayWithArray:[self defaultLinks]];
+    // Ladda in våra default links i masterViewControllern
+    UINavigationController *masterNavigationController = splitViewController.viewControllers.firstObject;
+    MasterViewController *masterViewController = (MasterViewController *)masterNavigationController.topViewController;
+    masterViewController.links = [self defaultLinks].mutableCopy;
     
     return YES;
 }
 
-- (NSArray *)defaultLinks {    
+- (NSArray *)defaultLinks {
     Link *firstLink = [[Link alloc] initWithURL:[NSURL URLWithString:@"http://lisam.liu.se"]];
     
     Link *secondLink = [[Link alloc] initWithURL:[NSURL URLWithString:@"http://www.ida.liu.se/~725G60/index.sv.shtml"]];
@@ -57,4 +46,17 @@
     
     return @[firstLink, secondLink, thirdLink, fourthLink];
 }
+
+
+#pragma mark - Split view
+
+- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
+    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[DetailViewController class]] && ([(DetailViewController *)[(UINavigationController *)secondaryViewController topViewController] link] == nil)) {
+        // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 @end

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0600"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D105647214E826FB0055F672"
+               BlueprintIdentifier = "B17FC59319DEE44600621EA7"
                BuildableName = "Favourites.app"
                BlueprintName = "Favourites"
+               ReferencedContainer = "container:Favourites.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B17FC5AF19DEE44600621EA7"
+               BuildableName = "FavouritesTests.xctest"
+               BlueprintName = "FavouritesTests"
                ReferencedContainer = "container:Favourites.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,11 +42,21 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B17FC5AF19DEE44600621EA7"
+               BuildableName = "FavouritesTests.xctest"
+               BlueprintName = "FavouritesTests"
+               ReferencedContainer = "container:Favourites.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D105647214E826FB0055F672"
+            BlueprintIdentifier = "B17FC59319DEE44600621EA7"
             BuildableName = "Favourites.app"
             BlueprintName = "Favourites"
             ReferencedContainer = "container:Favourites.xcodeproj">
@@ -51,7 +75,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D105647214E826FB0055F672"
+            BlueprintIdentifier = "B17FC59319DEE44600621EA7"
             BuildableName = "Favourites.app"
             BlueprintName = "Favourites"
             ReferencedContainer = "container:Favourites.xcodeproj">
@@ -69,7 +93,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D105647214E826FB0055F672"
+            BlueprintIdentifier = "B17FC59319DEE44600621EA7"
             BuildableName = "Favourites.app"
             BlueprintName = "Favourites"
             ReferencedContainer = "container:Favourites.xcodeproj">

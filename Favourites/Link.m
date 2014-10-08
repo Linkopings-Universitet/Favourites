@@ -16,7 +16,7 @@
 
 @implementation Link
 
-- (id)initWithURL:(NSURL *)anURL {
+- (instancetype)initWithURL:(NSURL *)anURL {
     self = [super init];
     
     if (self) {

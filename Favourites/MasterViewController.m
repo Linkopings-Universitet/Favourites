@@ -2,12 +2,11 @@
 //  MasterViewController.m
 //  Favourites
 //
-//  Created by Alek Åström on 2012-02-12.
-//  Edited by Cenny Davidsson 2014-01-15.
-//  Copyright (c) 2012 Linköpings Universitet. All rights reserved.
+//  Created by Cenny Davidsson on 2014-10-03.
+//  Copyright (c) 2014 Linköpings University. All rights reserved.
 //
 
-/**
+/*
  Denna vykontroller styr en tabell som visar länkar.
  När en användare trycker på en länk pushas DetailViewController in på iPhone,
  medan på iPad så uppdateras bara DetailViewController med en ny länk.
@@ -33,41 +32,48 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
-
-#define IS_IPAD() UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+#import "Link.h"
 
 @implementation MasterViewController
 
-#pragma mark - View lifecycle
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        self.clearsSelectionOnViewWillAppear = NO;
+        self.preferredContentSize = CGSizeMake(320.0, 600.0);
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    if (IS_IPAD()) {
-        // Hämta detaljvyn från SplitViewControllern
-        self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-        // Markera första cellen och sätt första länken till detaljvyn
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
-        self.detailViewController.link = self.links[0];
-        
-        // När man öppnar/stänger popovern ska tabellen ej avmarkera celler
-        self.clearsSelectionOnViewWillAppear = NO;
-    }
+    // Do any additional setup after loading the view, typically from a nib.
     
     // Avkommentera följande för att enkelt få en edit-knapp
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
+
+    self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
+#pragma mark - Segues
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([segue.identifier isEqualToString:@"linkPush"]) {
-        // Skicka länken till detaljvyn
-        DetailViewController *detailVC = segue.destinationViewController;
-        detailVC.link = self.links[self.tableView.indexPathForSelectedRow.row];
+    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        
+        // Hämta länken från våran array.
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        Link *link = self.links[indexPath.row];
+        
+        // Skicka länken till detaljvyn.
+        DetailViewController *controller = (DetailViewController *)[segue.destinationViewController topViewController];
+        controller.link = link;
+        
+        // Splitview configuration
+        controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+        controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
 }
 
-#pragma mark - Table View Data Source
+#pragma mark - Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.links.count;
@@ -75,11 +81,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // Hämta cell
-    static NSString *reuseIdentifier = @"LinkCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    
-    // Hämta data
+    // Hämta cell.
+    static NSString *reuseIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+
+    // Hämta data.
     Link *link = self.links[indexPath.row];
     
     // Konfigurera cellen
@@ -88,17 +94,5 @@
     return cell;
 }
 
-#pragma mark - Table View Delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (!IS_IPAD()) {
-        // Om iPhone, pusha in detaljkontrollern
-        [self performSegueWithIdentifier:@"linkPush" sender:self];
-    } else {
-        // Om iPad, sätt data i detaljkontrollern
-        self.detailViewController.link = self.links[indexPath.row];
-    }
-}
 
 @end

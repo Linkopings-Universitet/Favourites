@@ -13,6 +13,6 @@
 
 @property (nonatomic, copy) NSURL *url;
 
-- (id)initWithURL:(NSURL *)anURL;
+- (instancetype)initWithURL:(NSURL *)anURL;
 
 @end
