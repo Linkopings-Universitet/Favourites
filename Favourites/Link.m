@@ -20,7 +20,7 @@
     self = [super init];
     
     if (self) {
-        self.url = anURL;
+        _url = anURL;
     }
     
     return self;
