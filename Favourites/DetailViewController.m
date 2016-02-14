@@ -2,9 +2,7 @@
 //  DetailViewController.m
 //  Favourites
 //
-//  Created by Cenny Davidsson on 2014-10-03.
 //  Copyright (c) 2014 Linköpings University. All rights reserved.
-//
 
 /*
  Denna vykontroller visar upp en länk i en WebView som täcker hela vykontrollerns storlek.
@@ -49,6 +47,5 @@
     // Do any additional setup after loading the view, typically from a nib.
     [self configureView];
 }
-
 
 @end

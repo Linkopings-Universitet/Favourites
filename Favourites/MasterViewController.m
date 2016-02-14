@@ -2,9 +2,8 @@
 //  MasterViewController.m
 //  Favourites
 //
-//  Created by Cenny Davidsson on 2014-10-03.
 //  Copyright (c) 2014 Linköpings University. All rights reserved.
-//
+
 
 /*
  Denna vykontroller styr en tabell som visar länkar.
