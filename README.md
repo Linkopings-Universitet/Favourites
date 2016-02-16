@@ -1,5 +1,7 @@
 # Favourites
 
+## Containment controllers, modala vykontroller och UITableView
+
 Ett av de absolut vanligaste sätten att presentera data på en iPhone eller iPad är genom en lista. Komponenten man använder för att göra detta heter tabellvy (eller "table view" på engelska). Allting från appar i App Store, kontakter i adressboken eller inställningar i inställningsappen visas med hjälp av en tabellvy och detta visar tecken på dess extrema flexibilitet. Har du någon gång använt en iPhone eller iPad så har du utan tvekan stött på en tabellvy någonstans.
 
 Att få en tabellvy att visa simpel data är tämligen enkelt men det tar tid att bemästra denna vy fullt ut. I den här labben kommer du lära dig att visa data med hjälp av standardceller och hantera editing mode för att manipulera data i tabellen. Mer avancerade saker, såsom att flytta på data (drag-and-drop) eller söka i data kommer inte behandlas här. Detta får studeras på egen hand.
@@ -58,7 +60,7 @@ I denna uppgift kommer du även att träna på hur MVC appliceras i en app och l
 
 #### Frågor
 
-(Inga frågor är märkta för att redovisas till denna uppgift.)
+Inga frågor är märkta för att redovisas till denna uppgift.
 
 1. Vad är en cell i en tabellvy? Vilka olika typer av standardceller finns det? Vad innehåller en cell?
 
